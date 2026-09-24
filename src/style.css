@@ -1,0 +1,156 @@
+:root {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  margin-top: 14px;
+}
+
+.form-row {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+form input {
+  box-sizing: border-box;
+
+  width: 500px;
+  height: 30px;
+}
+
+form input:focus {
+  outline: none;
+}
+
+.input-pair {
+  margin-top: 12px;
+}
+
+.submit-button {
+  height: 30px;
+}
+
+.content {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  padding: 60px;
+  margin: 0 auto;
+
+  width: 1145px
+}
+
+.days {
+  margin: 0 auto;
+
+  width: 620px;
+  height: fit-content;
+
+  background-color: rgb(240, 243, 245);
+
+  border-radius: 10px;
+
+  list-style-type: none;
+}
+
+.days > * {
+  border-bottom: 2px solid rgb(255, 255, 255);
+  padding: 18px;
+}
+
+.days li {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+
+  padding: 18px;
+}
+
+.days li .datetime {
+  width: 82px;
+}
+
+.days li .temp-max {
+  width: 45px;
+}
+
+.days li .temp-min {
+  width: 45px;
+}
+
+.days li .temp-feels {
+  width: 65px;
+}
+
+.days li .conditions {
+  width: 125px;
+  text-align: left;
+}
+
+.days li .precip {
+  width: 50px;
+}
+
+.days li .precip-prob {
+  width: 50px;
+}
+
+.hours {
+  margin: 0 auto;
+
+  width: 405px;
+  height: fit-content;
+
+  background-color: rgb(240, 243, 245);
+
+  border-radius: 10px;
+
+  list-style-type: none;
+}
+
+.hours > * {
+  border-bottom: 2px solid rgb(255, 255, 255);
+  padding: 18px;
+}
+
+.hours li {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+
+  padding: 18px;
+}
+
+.hours li {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+
+  padding: 18px;
+}
+
+.hours li .time {
+  width: 100px;
+}
+
+.hours li .temp {
+  width: 40px;
+}
+
+.hours li .humidity {
+  width: 70px;
+}
+
+.hours li .precip {
+  width: 45px;
+}
+
+.hours li .precip-prob {
+  width: 30px;
+}

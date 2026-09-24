@@ -1,28 +1,14 @@
-const getWeatherData = {
+export const weatherDataController = {
   weatherData: null,
-
-  getMetricData: async function(location, daysSelection = "") {
+  
+  // dataType = metric | uk | us
+  loadData: async function(location, dataType = "metric", daysSelection = "") {
     if(daysSelection != "") {
       daysSelection = "/" + daysSelection;
     }
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=metric&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=${dataType}&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
     this.weatherData = await response.json();
-  },
-
-  getUSData: async function(location, daysSelection = "") {
-    if(daysSelection != "") {
-      daysSelection = "/" + daysSelection;
-    }
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=us&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
-    this.weatherData = await response.json();
-  },
-
-  getUKData: async function(location, daysSelection = "") {
-    if(daysSelection != "") {
-      daysSelection = "/" + daysSelection;
-    }
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=uk&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
-    this.weatherData = await response.json();
+    return Promise.resolve();
   },
 
   getTemp: function(day) {
@@ -33,20 +19,6 @@ const getWeatherData = {
       feelslike: this.weatherData.days[day].feelslike,
       feelslikemin: this.weatherData.days[day].feelslikemin,
       feelslikemax: this.weatherData.days[day].feelslikemax,
-    }
-  },
-
-  getHourTemp: function(day, hour) {
-    return {
-      temp: this.weatherData.days[day].hours[hour].temp,
-      feelslike: this.weatherData.days[day].hours[hour].feelslike,
-    }
-  },
-
-  getCurrentTemp: function() {
-    return {
-      temp: this.weatherData.currentConditions.temp,
-      feelslike: this.weatherData.currentConditions.feelslike,
     }
   },
 
@@ -66,6 +38,47 @@ const getWeatherData = {
         snow: this.weatherData.days[day].snow,
         snowdepth: this.weatherData.days[day].snowdepth,
       }
+    }
+  },
+
+  getWindAndPressure: function(day) {
+    return {
+      windspeed: this.weatherData.days[day].windspeed,
+      pressure: this.weatherData.days[day].pressure,
+      humidity: this.weatherData.days[day].humidity
+    }
+  },
+
+  getDateTime: function(day) {
+    return {
+      datetime: this.weatherData.days[day].datetime,
+    }
+  },
+
+  getConditions: function(day) {
+    return {
+      conditions: this.weatherData.days[day].conditions,
+    }
+  },
+
+  getHourTemp: function(day, hour) {
+    return {
+      temp: this.weatherData.days[day].hours[hour].temp,
+      feelslike: this.weatherData.days[day].hours[hour].feelslike,
+    }
+  },
+  
+  getHourWindAndPressure: function(day, hour) {
+    return {
+      windspeed: this.weatherData.days[day].hours[hour].windspeed,
+      pressure: this.weatherData.days[day].hours[hour].pressure,
+      humidity: this.weatherData.days[day].hours[hour].humidity
+    }
+  },
+  
+  getHourDateTime: function(day, hour) {
+    return {
+      datetime: this.weatherData.days[day].hours[hour].datetime,
     }
   },
 
@@ -107,19 +120,16 @@ const getWeatherData = {
     }
   },
 
-  getWindAndPressure: function(day) {
+  getCurrentTemp: function() {
     return {
-      windspeed: this.weatherData.days[day].windspeed,
-      pressure: this.weatherData.days[day].pressure,
-      humidity: this.weatherData.days[day].humidity
+      temp: this.weatherData.currentConditions.temp,
+      feelslike: this.weatherData.currentConditions.feelslike,
     }
   },
 
-  getHourWindAndPressure: function(day, hour) {
+  getCurrentDateTime: function() {
     return {
-      windspeed: this.weatherData.days[day].hours[hour].windspeed,
-      pressure: this.weatherData.days[day].hours[hour].pressure,
-      humidity: this.weatherData.days[day].hours[hour].humidity
+      datetime: this.weatherData.currentConditions.datetime,
     }
   },
 
@@ -130,5 +140,5 @@ const getWeatherData = {
       humidity: this.weatherData.currentConditions.humidity
     }
   },
-
+  
 }
