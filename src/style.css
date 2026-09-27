@@ -1,5 +1,39 @@
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("fonts/Roboto-Bold.woff2") format("woff2"),
+    url("fonts/Roboto-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("fonts/Roboto-Regular.woff2") format("woff2"),
+    url("fonts/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Lt";
+  src:
+    url("fonts/Roboto-Light.woff2") format("woff2"),
+    url("fonts/Roboto-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+  --white: #FFFFFF;
+  --black: #222222;
+  --orange: #e95d2a;
+  --grey: #f4f4f6;
 }
 
 * {
@@ -7,32 +41,101 @@
   padding: 0;
 }
 
-form {
-  margin-top: 14px;
+body,
+html {
+  min-height: 100vh;
 }
 
-.form-row {
+.template-root {
+  background-color: var(--grey);
+
+  position: relative;
+
+  min-height: 100vh;
+}
+
+.header {
+  background-color: var(--black);
+  height: 80px;
+}
+
+.header-outer {
+  height: 100%;
+}
+
+.header-inner {
+  background-color: var(--black);
+
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  max-width: 890px;
   margin: 0 auto;
+}
+
+.header-logo {
+  font-size: 2rem;
+  color: var(--orange);
+
   width: fit-content;
 }
-
-form input {
-  box-sizing: border-box;
-
-  width: 500px;
-  height: 30px;
+.header-location-div {
+  display: flex;
 }
 
-form input:focus {
+.header-location {
+  font-size: 1.1rem;
+  color: white;
+  margin-left: 10px;
+}
+
+.header-location-temp {
+  font-size: 1.1rem;
+  color: white;
+  margin-left: 10px;
+}
+
+
+.header-search-bar {
+  max-width: 300px;
+
+  border-radius: 6px;
+
+  background-color: var(--white);
+
+  padding: 8px 12px;
+  margin-left: auto;
+
+  display: flex;
+}
+
+.search-icon {
+  margin-right: 12px;
+
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  align-self: center;
+
+  width: fit-content;
+  height: 100%;
+
+  border-radius: 6px;
+}
+
+.search-form input {
+  background-color: none;
   outline: none;
+  border: none;
+
+  border-radius: 6px;
 }
 
-.input-pair {
-  margin-top: 12px;
-}
-
-.submit-button {
-  height: 30px;
+.search-form input:focus {
+  outline: none;
 }
 
 .content {
@@ -43,7 +146,8 @@ form input:focus {
   padding: 60px;
   margin: 0 auto;
 
-  width: 1145px
+  min-height: 100%;
+  width: 890px;
 }
 
 .days {
