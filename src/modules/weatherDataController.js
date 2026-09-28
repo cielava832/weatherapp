@@ -6,9 +6,19 @@ export const weatherDataController = {
     if(daysSelection != "") {
       daysSelection = "/" + daysSelection;
     }
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=${dataType}&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
-    this.weatherData = await response.json();
-    return Promise.resolve();
+      const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=${dataType}&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
+      this.weatherData = await response.json();
+      return Promise.resolve();
+  },
+
+  getLocationTimezone: function() {
+    let city = weatherDataController.weatherData.address;
+
+    city = city.replace(/\b\w/g, l => l.toUpperCase());
+
+    let timezone = weatherDataController.weatherData.timezone.split("/")[0];
+
+    return city + ", " + timezone;
   },
 
   getTemp: function(day) {
@@ -23,7 +33,7 @@ export const weatherDataController = {
   },
 
   getPrecipitation: function(day) {
-    if(this.weatherData.currentConditions.preciptype != null) {
+    if(this.weatherData.days[day].preciptype != null) {
       return {
         precip: this.weatherData.days[day].precip,
         precipprob: this.weatherData.days[day].precipprob,
