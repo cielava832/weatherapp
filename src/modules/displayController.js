@@ -72,24 +72,33 @@ export const displayController = {
     this.locationTemp.textContent = `${weatherDataController.getCurrentTemp().temp}°C`;
   },
 
+  clearHeaderLocation: function() {
+    this.location.textContent = "";
+    this.locationTemp.textContent = "";
+  },
+
   bindEvents: function() {
     this.form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
-    if(this.input.value == "") {
-      await weatherDataController.loadData();
-      this.clearContent();
-      this.loadDays();
-      this.loadDaysHours();
-    } else {
+ 
+      try {
         await weatherDataController.loadData(this.input.value)
         this.loadHeaderLocation();
         this.loadHeaderTemp();
-        console.log(weatherDataController.weatherData);
         this.clearContent();
         this.loadDays();
         this.loadDaysHours();
-    }
+      } catch (error) {
+        this.clearContent();
+        this.clearHeaderLocation();
+
+        let errorDiv = document.createElement("div");
+
+        errorDiv.classList.add("error");
+        errorDiv.textContent = `${error}`
+
+        this.content.prepend(errorDiv);
+      }
   });
   },
 };

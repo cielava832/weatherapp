@@ -6,9 +6,20 @@ export const weatherDataController = {
     if(daysSelection != "") {
       daysSelection = "/" + daysSelection;
     }
+    if (location == "") {
+      location = "New York City";
+    }
+    try {
       const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=${dataType}&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
+      console.log(response);
+      if (!response.ok) {
+        return Promise.reject(`HTTP error! Status: ${response.status}, address is too short to be uniquely identified`);
+      }
       this.weatherData = await response.json();
       return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error.message)
+    }
   },
 
   getLocationTimezone: function() {
