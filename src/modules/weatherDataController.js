@@ -1,8 +1,7 @@
 export const weatherDataController = {
   weatherData: null,
-  
-  // dataType = metric | uk | us
-  loadData: async function(location, dataType = "metric", daysSelection = "") {
+
+  loadData: async function(location, daysSelection = "") {
     if(daysSelection != "") {
       daysSelection = "/" + daysSelection;
     }
@@ -10,7 +9,7 @@ export const weatherDataController = {
       location = "New York City";
     }
     try {
-      const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=${dataType}&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
+      const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=metric&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
       console.log(response);
       if (!response.ok) {
         return Promise.reject(`HTTP error! Status: ${response.status}, address is too short to be uniquely identified`);
@@ -29,7 +28,10 @@ export const weatherDataController = {
 
     let timezone = weatherDataController.weatherData.timezone.split("/")[0];
 
-    return city + ", " + timezone;
+    return {
+      cityTimezone: city + ", " + timezone,
+      city: city,
+    };
   },
 
   getTemp: function(day) {
@@ -144,13 +146,12 @@ export const weatherDataController = {
   getCurrentTemp: function() {
     return {
       temp: this.weatherData.currentConditions.temp,
-      feelslike: this.weatherData.currentConditions.feelslike,
     }
   },
 
   getCurrentDateTime: function() {
     return {
-      datetime: this.weatherData.currentConditions.datetime,
+      datetime: this.weatherData.currentConditions.datetime.substring(0, 5),
     }
   },
 
@@ -158,7 +159,14 @@ export const weatherDataController = {
     return {
       windspeed: this.weatherData.currentConditions.windspeed,
       pressure: this.weatherData.currentConditions.pressure,
-      humidity: this.weatherData.currentConditions.humidity
+      humidity: this.weatherData.currentConditions.humidity,
+    }
+  },
+
+  getCurrentConditions: function(day) {
+    return {
+      conditions: this.weatherData.currentConditions.conditions,
+      description: this.weatherData.description,
     }
   },
   
