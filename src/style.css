@@ -32,7 +32,11 @@
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
   --white: #FFFFFF;
   --black: #222222;
+  --lighter-orange: #eaa289;
+  --light-orange: #f37a52;
   --orange: #e95d2a;
+  --lighter-grey: #ededee;
+  --light-grey: #dddddf;
   --grey: #ececee;
   --dark-grey: #cccccf;
 }
@@ -213,6 +217,38 @@ html {
   border-radius: 10px;
 }
 
+.temp-select {
+  background-color: var(--lighter-grey);
+  width: 90px;
+  height: 50px;
+
+  border-radius: 30px;
+
+  box-sizing: border-box;
+
+  padding: 9px;
+
+  display: flex;
+}
+
+.temp-select button {
+  width: 50%;
+  height: 100%;
+
+  border-radius: 20px;
+  border: none;
+
+  background-color: var(--light-grey);
+}
+
+.temp-select button:hover {
+  background-color: var(--lighter-orange);
+}
+
+.temp-select .on {
+  background-color: var(--light-orange);
+}
+
 .current {
   width: 100%;
   height: 100%;
@@ -356,7 +392,7 @@ html {
 }
 
 .days li .temp-feels {
-  width: 80px;
+  width: 90px;
 }
 
 .days li .conditions {

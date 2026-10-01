@@ -12,7 +12,7 @@ export const weatherDataController = {
       const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}${daysSelection}?unitGroup=metric&key=6NH27L49X5WCFJ33VJNQZ8NJN&contentType=json`);
       console.log(response);
       if (!response.ok) {
-        return Promise.reject(`HTTP error! Status: ${response.status}, address is too short to be uniquely identified`);
+        return Promise.reject(`City most likely not found`);
       }
       this.weatherData = await response.json();
       return Promise.resolve();
